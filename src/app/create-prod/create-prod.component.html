@@ -1,0 +1,12 @@
+<div class="hero-text">
+    <h1>Create a new Product</h1>
+</div>
+<form action="" [formGroup] ='createForm' (ngSubmit)='onSubmit()'>
+    <input formControlName="name" type="text" name="name" id="product-name" placeholder="product-name">
+    <input formControlName="price" type="text" name="price" id="product-price" placeholder="product-price">
+    <input formControlName="photo" type="text" name='photo' id="product-photo" placeholder="product-photo">
+    <input formControlName="color_way" type="text" name="color" id="product-color" placeholder="product-color">
+    <input formControlName="description" type="text" name="description" id="product-description" placeholder="product-description">
+    <input formControlName="qty" type="text" name='qty' id="product-qty" placeholder="product-qty">
+    <button type="submit" [disabled]="!createForm.valid">Submit</button>
+</form>
