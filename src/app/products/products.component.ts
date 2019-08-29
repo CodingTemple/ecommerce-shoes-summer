@@ -3,7 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../services/http.service';
 
 // Import for Products Interface
-import {ProdInterface} from './prod-interface'
+import {ProdInterface} from './prod-interface';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-products',
@@ -13,7 +14,7 @@ import {ProdInterface} from './prod-interface'
 export class ProductsComponent implements OnInit {
 products: ProdInterface
 
-  constructor(private dataService: HttpService) { }
+  constructor(private dataService: HttpService, private cartService: CartService) { }
 
   ngOnInit() {
     return this.dataService.getProducts().subscribe( data => {
@@ -31,5 +32,14 @@ products: ProdInterface
       console.log(this.products)
     })
   }
+
+  // Create the function for adding to Cart using 
+  // The cart service recently created
+
+
+  addToCartProd(){
+    this.cartService.addToCart(this.products)
+  }
+
 
 }
