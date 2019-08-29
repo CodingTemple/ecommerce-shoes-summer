@@ -13,6 +13,22 @@ import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { CreateProdComponent } from './create-prod/create-prod.component';
 import { ReactiveFormsModule } from '@angular/forms';
+
+// Imports for Firebase Libs we will need
+import { AngularFireModule } from '@angular/fire'
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireDatabase } from '@angular/fire/database';
+
+const config = {
+  apiKey: "AIzaSyDxVQpoS-VG2FUGCRkDPhBeXYOtnQIPghA",
+  authDomain: "ecommerce-shoes-summer.firebaseapp.com",
+  databaseURL: "https://ecommerce-shoes-summer.firebaseio.com",
+  projectId: "ecommerce-shoes-summer",
+  storageBucket: "",
+  messagingSenderId: "690622637999",
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,9 +46,13 @@ import { ReactiveFormsModule } from '@angular/forms';
     (in this case MDBootstrapModule) as a root module and only loads this
     when needed (which is called lazy loading) and not before
     */
-   ReactiveFormsModule
+   ReactiveFormsModule,
+   AngularFireModule.initializeApp(config),
+   AngularFirestoreModule,
+   AngularFireAuthModule,
+   AngularFireStorageModule
   ],
-  providers: [],
+  providers: [AngularFireDatabase], // This is used when a service is needed
   bootstrap: [AppComponent]
 })
 export class AppModule { }
