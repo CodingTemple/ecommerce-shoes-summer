@@ -1,6 +1,7 @@
 import { Injectable,Inject, forwardRef } from '@angular/core';
 
-import { AngularFireDatabase } from '@angular/fire/database'
+import { AngularFireDatabase, AngularFireList } from '@angular/fire/database'
+import { ProdInterface } from '../products/prod-interface';
 
 @Injectable({
   providedIn: 'root'

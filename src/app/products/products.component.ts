@@ -6,7 +6,10 @@ import { HttpService } from '../services/http.service';
 import {ProdInterface} from './prod-interface';
 import { CartService } from '../services/cart.service';
 
+
 import { ProductService } from '../services/product.service'
+import { AngularFireList } from '@angular/fire/database';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-products',
@@ -14,7 +17,7 @@ import { ProductService } from '../services/product.service'
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent implements OnInit {
-products$: ProdInterface[]
+products$:Observable<{}>
 
   constructor(private dataService: HttpService, private cartService: CartService, private productService:ProductService) { 
    this.products$ =  this.productService.getAll();
@@ -41,10 +44,10 @@ products$: ProdInterface[]
   // The cart service recently created
 
 
-  addToCartProd(){
-    this.cartService.addToCart(this.products$)
-    console.log(this.products$)
-  }
+  // addToCartProd(){
+  //   this.cartService.addToCart(this.products$,1)
+  //   console.log(this.products$)
+  // }
 
 
 }

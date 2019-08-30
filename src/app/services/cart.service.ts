@@ -1,9 +1,10 @@
 import { Injectable,Inject, forwardRef } from '@angular/core';
 
-import { AngularFireDatabase } from '@angular/fire/database'
+import { AngularFireDatabase, AngularFireList } from '@angular/fire/database'
 import { take } from 'rxjs/operators';
 
 import { Observable } from 'rxjs';
+import { ProdInterface } from '../products/prod-interface';
 
 
 @Injectable({
@@ -56,10 +57,8 @@ export class CartService {
     let cartId = await this.getOrCreateCart();
     let item$ = this.getItem(cartId,product.$key)
         
-    item$.pipe(take(1)).subscribe(item => {
-      if(item.$exists()) item$.update({quantity : item.quantity + 1});
-      else item$.set({product : product , quantity : 1 });
-      if (quantity === 0) item$.remove();
+    item$.snapshotChanges().pipe(take(1)).subscribe(item => {
+      item$.update({product: product, quantity: (item.payload.exportVal().quantity || 0) + 1 });
     })
 
     // item$.update({product:product.name, quantity: (product.qty || 0) + change})
