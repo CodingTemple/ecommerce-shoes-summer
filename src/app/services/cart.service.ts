@@ -52,12 +52,14 @@ export class CartService {
     return this.db.object('/shopping-carts/' + cartId + '/items/' + productId)
   }
 
-  async addToCart(product:ProdInterface, change:number){
-    let quant_num: number = 0;
+  async addToCart(product:Observable<ProdInterface>, change:number){
+    let key
     let cartId = await this.getOrCreateCart();
-    let item$ = this.getItem(cartId,product.$key)
+    let item$ = this.getItem(cartId,product.)
+    console.log(key)
         
     item$.snapshotChanges().pipe(take(1)).subscribe(item => {
+      key = item.payload.exportVal().$key
       item$.update({product: product, quantity: (item.payload.exportVal().quantity || 0) + 1 });
     })
 
