@@ -1,14 +1,17 @@
-import { Injectable } from '@angular/core';
+import { Injectable,Inject, forwardRef } from '@angular/core';
 
 import { AngularFireDatabase } from '@angular/fire/database'
-import { ProdInterface } from '../products/prod-interface';
+import { take } from 'rxjs/operators';
+
+import { Observable } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
 
-  constructor(private db: AngularFireDatabase) { }
+  constructor(@Inject(forwardRef(() => AngularFireDatabase))private db: AngularFireDatabase) { }
 
 
 
@@ -19,7 +22,8 @@ export class CartService {
     })
   }
 
-  private getCart(cartId:string){
+  async getCart(){
+    let cartId = await this.getOrCreateCart()
     return this.db.object('/shopping-carts/' + cartId)
   }
 
@@ -47,11 +51,18 @@ export class CartService {
     return this.db.object('/shopping-carts/' + cartId + '/items/' + productId)
   }
 
-  async addToCart(product:ProdInterface){
+  async addToCart(product:ProdInterface, change:number){
     let quant_num: number = 0;
     let cartId = await this.getOrCreateCart();
-    let item$ = this.getItem(cartId,product.name)
-    item$.set({product:product, quantity: this.increamentQty(quant_num)})
+    let item$ = this.getItem(cartId,product.$key)
+        
+    item$.pipe(take(1)).subscribe(item => {
+      if(item.$exists()) item$.update({quantity : item.quantity + 1});
+      else item$.set({product : product , quantity : 1 });
+      if (quantity === 0) item$.remove();
+    })
+
+    // item$.update({product:product.name, quantity: (product.qty || 0) + change})
   }
 
   private increamentQty(quant_num:number){

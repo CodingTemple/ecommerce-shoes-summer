@@ -14,6 +14,10 @@ import { HomeComponent } from './home/home.component';
 import { CreateProdComponent } from './create-prod/create-prod.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
+import { CategoryService } from './services/category.service'
+import { HttpService } from './services//http.service';
+import { CartService } from './services/cart.service'
+import { ProductService } from './services/product.service'
 // Imports for Firebase Libs we will need
 import { AngularFireModule } from '@angular/fire'
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -52,7 +56,7 @@ const config = {
    AngularFireAuthModule,
    AngularFireStorageModule
   ],
-  providers: [AngularFireDatabase], // This is used when a service is needed
+  providers: [AngularFireDatabase, CategoryService,HttpService,CartService, ProductService], // This is used when a service is needed
   bootstrap: [AppComponent]
 })
 export class AppModule { }

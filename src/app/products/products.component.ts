@@ -6,31 +6,35 @@ import { HttpService } from '../services/http.service';
 import {ProdInterface} from './prod-interface';
 import { CartService } from '../services/cart.service';
 
+import { ProductService } from '../services/product.service'
+
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent implements OnInit {
-products: ProdInterface
+products$: ProdInterface[]
 
-  constructor(private dataService: HttpService, private cartService: CartService) { }
+  constructor(private dataService: HttpService, private cartService: CartService, private productService:ProductService) { 
+   this.products$ =  this.productService.getAll();
+  }
 
   ngOnInit() {
-    return this.dataService.getProducts().subscribe( data => {
+    // return this.dataService.getProducts().subscribe( data => {
 
-      this.products = {
-        color_way: data[0][0]['color_way'],
-        name: data[0][0]['name'],
-        id: data[0][0]['id'],
-        description:data[0][0]['description'],
-        price: data[0][0]['price'],
-        photo:data[0][0]['photo'],
-        qty:data[0][0]['qty']
+    //   this.products = {
+    //     color_way: data[0][0]['color_way'],
+    //     name: data[0][0]['name'],
+    //     id: data[0][0]['id'],
+    //     description:data[0][0]['description'],
+    //     price: data[0][0]['price'],
+    //     photo:data[0][0]['photo'],
+    //     qty:data[0][0]['qty']
 
-      }
-      console.log(this.products)
-    })
+    //   }
+    //   console.log(this.products)
+    // })
   }
 
   // Create the function for adding to Cart using 
@@ -38,7 +42,8 @@ products: ProdInterface
 
 
   addToCartProd(){
-    this.cartService.addToCart(this.products)
+    this.cartService.addToCart(this.products$)
+    console.log(this.products$)
   }
 
 
