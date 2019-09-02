@@ -24,6 +24,10 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { OrderService } from './services/order.service';
+import { AngularFireFunctions } from '@angular/fire/functions';
 
 const config = {
   apiKey: "AIzaSyDxVQpoS-VG2FUGCRkDPhBeXYOtnQIPghA",
@@ -39,7 +43,9 @@ const config = {
     NavComponent,
     ProductsComponent,
     HomeComponent,
-    CreateProdComponent
+    CreateProdComponent,
+    ShoppingCartComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +62,7 @@ const config = {
    AngularFireAuthModule,
    AngularFireStorageModule
   ],
-  providers: [AngularFireDatabase, CategoryService,HttpService,CartService, ProductService], // This is used when a service is needed
+  providers: [AngularFireDatabase, CategoryService,HttpService,CartService, ProductService,OrderService,AngularFireFunctions], // This is used when a service is needed
   bootstrap: [AppComponent]
 })
 export class AppModule { }

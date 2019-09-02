@@ -17,7 +17,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent implements OnInit {
-products$:ProdInterface
+products$: ProdInterface
 
   constructor(private dataService: HttpService, private cartService: CartService, private productService:ProductService) { 
    this.products$ =  this.productService.getAll();
@@ -44,9 +44,9 @@ products$:ProdInterface
   // The cart service recently created
 
 
-  addToCartProd(){
-    this.cartService.addToCart(this.products$,1)
-    console.log(this.products$)
+  addToCartProd(product:ProdInterface){
+    this.cartService.addToCart(product,1)
+    console.log(product)
   }
 
 
