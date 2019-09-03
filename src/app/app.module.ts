@@ -14,12 +14,20 @@ import { HomeComponent } from './home/home.component';
 import { CreateProdComponent } from './create-prod/create-prod.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
+import { CategoryService } from './services/category.service'
+import { HttpService } from './services//http.service';
+import { CartService } from './services/cart.service'
+import { ProductService } from './services/product.service'
 // Imports for Firebase Libs we will need
 import { AngularFireModule } from '@angular/fire'
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { OrderService } from './services/order.service';
+import { AngularFireFunctions } from '@angular/fire/functions';
 
 const config = {
   apiKey: "AIzaSyDxVQpoS-VG2FUGCRkDPhBeXYOtnQIPghA",
@@ -35,7 +43,9 @@ const config = {
     NavComponent,
     ProductsComponent,
     HomeComponent,
-    CreateProdComponent
+    CreateProdComponent,
+    ShoppingCartComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +62,7 @@ const config = {
    AngularFireAuthModule,
    AngularFireStorageModule
   ],
-  providers: [AngularFireDatabase], // This is used when a service is needed
+  providers: [AngularFireDatabase, CategoryService,HttpService,CartService, ProductService,OrderService,AngularFireFunctions], // This is used when a service is needed
   bootstrap: [AppComponent]
 })
 export class AppModule { }

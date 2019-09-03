@@ -18,6 +18,19 @@
             <li class="nav-item">
                 <a class="nav-link waves-light" routerLink="/create" mdbWavesEffect>Create a Product</a>
             </li>
+            <li class="nav-item">
+                <button (click)="auth.googleSignin()">
+                        <i class="fa fa-google"></i> Connect Google
+                    </button>
+                </li>
+                <li *ngIf="auth.user$ | async;">
+                        <div *ngIf="auth.user$ | async as user">
+                                {{ user.displayName }}
+                        </div>
+                </li>
+                <li class="nav-item">
+                        <button (click)="auth.signOut()">Logout</button>
+                </li>
             <!-- Dropdown -->
             <li class="nav-item dropdown" dropdown>
                 <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>

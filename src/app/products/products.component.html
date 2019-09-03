@@ -33,29 +33,29 @@
 
 <!--Carousel End-->
 
-<div *ngIf='products'>
+<div *ngIf='products$'>
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4" *ngFor="let product of products$ | async">
       <mdb-card>
         <!--Card image-->
-        <mdb-card-img [src]="products.photo" alt="Card image cap"></mdb-card-img>
+        <mdb-card-img [src]="product.photo" alt="Card image cap"></mdb-card-img>
         <!--Card content-->
         <mdb-card-body>
       
           <!--Title-->
           <mdb-card-title>
-            <h4>{{products.name}}</h4>
+            <h4>{{product.name}}</h4>
           </mdb-card-title>
       
           <!--Text-->
           <mdb-card-text> 
-            {{products.description}}
+            {{product.description}}
           </mdb-card-text>
           <span> 
-            <mdb-card-text>{{products.price}}</mdb-card-text>
+            <mdb-card-text>{{product.price}}</mdb-card-text>
           </span>
       
-        <button (click)="addToCartProd()" class="btn btn-primary btn-block">Add To Cart</button>
+        <button (click)="addToCartProd(product)" class="btn btn-primary btn-block">Add To Cart</button>
         </mdb-card-body>
       </mdb-card>
     </div>
