@@ -53,7 +53,7 @@ export class CheckoutComponent implements OnInit,OnDestroy {
     this.cartSubscription = cart$.subscribe(cart => this.cart = cart)
 
     this.handler = StripeCheckout.configure({
-      key:'pk_test_eX3r0a7vvFodinoX73MqSrDN',
+      key:'pk_test_YOUR_PK_TEST_KEY',
       locale:'auto',
       source:async (source) =>{
         this.loading = true
